@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type StateSingloton struct {
 	Callback StateCallbackInterface
 }
 
-// StateCallbackInterface is the interface that must be supported 
+// StateCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type StateCallbackInterface interface {
 	PostState(state *models.State)
@@ -50,7 +50,7 @@ type StateInput struct {
 // GetStates
 //
 // swagger:route GET /states states getStates
-// 
+//
 // Get all states
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetStates(c *gin.Context) {
 // PostState
 //
 // swagger:route POST /states states postState
-// 
+//
 // Creates a state
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetState(c *gin.Context) {
 }
 
 // UpdateState
-// 
+//
 // swagger:route PATCH /states/{ID} states updateState
 //
 // Update a state
@@ -178,7 +178,7 @@ func UpdateState(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&stateDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateState(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the stateDB
 	c.JSON(http.StatusOK, stateDB)
@@ -219,7 +219,6 @@ func DeleteState(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetStateUmlscsViaStates swagger:route GET /states/{ID}/umlscsviastates states getStateUmlscsViaStates
 //
 // Gets umlscs of state via field States of Umlsc.
@@ -243,7 +242,7 @@ func GetStateUmlscsViaStates(c *gin.Context) {
 	// get umlscs
 	var umlscDBs orm.UmlscDBs
 	columnName := gorm.ToColumnName("StatesID")
-	query := db.Where( genQuery(columnName), state.ID).Find(&umlscDBs)
+	query := db.Where(genQuery(columnName), state.ID).Find(&umlscDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetStateUmlscsViaStates(c *gin.Context) {
 
 	c.JSON(http.StatusOK, umlscDBs)
 }
-

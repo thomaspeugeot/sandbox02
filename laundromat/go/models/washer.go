@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/events"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/events"
 )
 
 // DrumLoadPerMinute rate of drum load

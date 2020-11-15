@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type PkgeltSingloton struct {
 	Callback PkgeltCallbackInterface
 }
 
-// PkgeltCallbackInterface is the interface that must be supported 
+// PkgeltCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type PkgeltCallbackInterface interface {
 	PostPkgelt(pkgelt *models.Pkgelt)
@@ -50,7 +50,7 @@ type PkgeltInput struct {
 // GetPkgelts
 //
 // swagger:route GET /pkgelts pkgelts getPkgelts
-// 
+//
 // Get all pkgelts
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetPkgelts(c *gin.Context) {
 // PostPkgelt
 //
 // swagger:route POST /pkgelts pkgelts postPkgelt
-// 
+//
 // Creates a pkgelt
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetPkgelt(c *gin.Context) {
 }
 
 // UpdatePkgelt
-// 
+//
 // swagger:route PATCH /pkgelts/{ID} pkgelts updatePkgelt
 //
 // Update a pkgelt
@@ -178,7 +178,7 @@ func UpdatePkgelt(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&pkgeltDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdatePkgelt(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the pkgeltDB
 	c.JSON(http.StatusOK, pkgeltDB)
@@ -218,5 +218,3 @@ func DeletePkgelt(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
-
-

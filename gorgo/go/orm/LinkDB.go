@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // LinkAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model linkAPI
 type LinkAPI struct {
-
 	models.Link
 
 	// association fields
-	
+
 	// field Middlevertice is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable a GORM `HAS ONE` association
 	MiddleverticeID *uint
@@ -32,7 +30,6 @@ type LinkAPI struct {
 
 	// ID generated for the implementation of the field Link{}.Links []*Classshape
 	Classshape_LinksDBID uint
-
 }
 
 // LinkDB describes a link in the database
@@ -138,8 +135,6 @@ func ModelToORMLinkTranslate(
 						linkDB.MiddleverticeID = &middleverticeId
 					}
 				}
-
-
 
 				query := db.Save(&linkDB)
 				if query.Error != nil {
@@ -252,13 +247,10 @@ func ORMToModelLinkTranslate(
 				return err
 			}
 
-
-				// Middlevertice field
-				if linkDB.MiddleverticeID != nil {
-					link.Middlevertice = (*map_VerticeDBID_VerticePtr)[*(linkDB.MiddleverticeID)]
-				}
-
-
+			// Middlevertice field
+			if linkDB.MiddleverticeID != nil {
+				link.Middlevertice = (*map_VerticeDBID_VerticePtr)[*(linkDB.MiddleverticeID)]
+			}
 
 		}
 	}
@@ -297,7 +289,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMLink(link *models.Link) {
 
 	DeleteORMLink(allORMStoreStruct.db, link)
 }
-
 
 func DeleteORMLink(
 	db *gorm.DB,

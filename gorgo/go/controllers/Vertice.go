@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type VerticeSingloton struct {
 	Callback VerticeCallbackInterface
 }
 
-// VerticeCallbackInterface is the interface that must be supported 
+// VerticeCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type VerticeCallbackInterface interface {
 	PostVertice(vertice *models.Vertice)
@@ -50,7 +50,7 @@ type VerticeInput struct {
 // GetVertices
 //
 // swagger:route GET /vertices vertices getVertices
-// 
+//
 // Get all vertices
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetVertices(c *gin.Context) {
 // PostVertice
 //
 // swagger:route POST /vertices vertices postVertice
-// 
+//
 // Creates a vertice
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetVertice(c *gin.Context) {
 }
 
 // UpdateVertice
-// 
+//
 // swagger:route PATCH /vertices/{ID} vertices updateVertice
 //
 // Update a vertice
@@ -178,7 +178,7 @@ func UpdateVertice(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&verticeDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateVertice(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the verticeDB
 	c.JSON(http.StatusOK, verticeDB)
@@ -219,7 +219,6 @@ func DeleteVertice(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetVerticeLinksViaMiddlevertice swagger:route GET /vertices/{ID}/linksviamiddlevertice vertices getVerticeLinksViaMiddlevertice
 //
 // Gets links of vertice via field Middlevertice of Link.
@@ -243,7 +242,7 @@ func GetVerticeLinksViaMiddlevertice(c *gin.Context) {
 	// get links
 	var linkDBs orm.LinkDBs
 	columnName := gorm.ToColumnName("MiddleverticeID")
-	query := db.Where( genQuery(columnName), vertice.ID).Find(&linkDBs)
+	query := db.Where(genQuery(columnName), vertice.ID).Find(&linkDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetVerticeLinksViaMiddlevertice(c *gin.Context) {
 
 	c.JSON(http.StatusOK, linkDBs)
 }
-

@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/orm"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type MachineSingloton struct {
 	Callback MachineCallbackInterface
 }
 
-// MachineCallbackInterface is the interface that must be supported 
+// MachineCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type MachineCallbackInterface interface {
 	PostMachine(machine *models.Machine)
@@ -50,7 +50,7 @@ type MachineInput struct {
 // GetMachines
 //
 // swagger:route GET /machines machines getMachines
-// 
+//
 // Get all machines
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetMachines(c *gin.Context) {
 // PostMachine
 //
 // swagger:route POST /machines machines postMachine
-// 
+//
 // Creates a machine
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetMachine(c *gin.Context) {
 }
 
 // UpdateMachine
-// 
+//
 // swagger:route PATCH /machines/{ID} machines updateMachine
 //
 // Update a machine
@@ -178,7 +178,7 @@ func UpdateMachine(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&machineDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateMachine(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the machineDB
 	c.JSON(http.StatusOK, machineDB)
@@ -219,7 +219,6 @@ func DeleteMachine(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetMachineWashersViaMachine swagger:route GET /machines/{ID}/washersviamachine machines getMachineWashersViaMachine
 //
 // Gets washers of machine via field Machine of Washer.
@@ -243,7 +242,7 @@ func GetMachineWashersViaMachine(c *gin.Context) {
 	// get washers
 	var washerDBs orm.WasherDBs
 	columnName := gorm.ToColumnName("MachineID")
-	query := db.Where( genQuery(columnName), machine.ID).Find(&washerDBs)
+	query := db.Where(genQuery(columnName), machine.ID).Find(&washerDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetMachineWashersViaMachine(c *gin.Context) {
 
 	c.JSON(http.StatusOK, washerDBs)
 }
-

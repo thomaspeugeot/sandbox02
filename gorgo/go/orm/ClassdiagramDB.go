@@ -2,30 +2,27 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // ClassdiagramAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model classdiagramAPI
 type ClassdiagramAPI struct {
-
 	models.Classdiagram
 
 	// association fields
-	
+
 	// ID generated for the implementation of the field Classdiagram{}.Classdiagrams []*Pkgelt
 	Pkgelt_ClassdiagramsDBID uint
-
 }
 
 // ClassdiagramDB describes a classdiagram in the database
@@ -125,7 +122,6 @@ func ModelToORMClassdiagramTranslate(
 			if classdiagramDB, ok := (*map_ClassdiagramDBID_ClassdiagramDB)[idx]; ok {
 				// set {{Fieldname}}ID
 
-
 				// set ClassshapesIDs reverse pointer to Classshape
 				for _, Classshape := range classdiagram.Classshapes {
 					if ClassshapeDBID, ok := (*map_ClassshapePtr_ClassshapeDBID)[Classshape]; ok {
@@ -137,7 +133,6 @@ func ModelToORMClassdiagramTranslate(
 						}
 					}
 				}
-
 
 				query := db.Save(&classdiagramDB)
 				if query.Error != nil {
@@ -250,16 +245,13 @@ func ORMToModelClassdiagramTranslate(
 				return err
 			}
 
-
-
-				// parse all ClassshapeDB and redeem the array of poiners to Classdiagram
-				for _, ClassshapeDB := range *map_ClassshapeDBID_ClassshapeDB {
-					if ClassshapeDB.Classdiagram_ClassshapesDBID == classdiagramDB.ID {
-						Classshape := (*map_ClassshapeDBID_ClassshapePtr)[ClassshapeDB.ID]
-						classdiagram.Classshapes = append(classdiagram.Classshapes, Classshape)
-					}
+			// parse all ClassshapeDB and redeem the array of poiners to Classdiagram
+			for _, ClassshapeDB := range *map_ClassshapeDBID_ClassshapeDB {
+				if ClassshapeDB.Classdiagram_ClassshapesDBID == classdiagramDB.ID {
+					Classshape := (*map_ClassshapeDBID_ClassshapePtr)[ClassshapeDB.ID]
+					classdiagram.Classshapes = append(classdiagram.Classshapes, Classshape)
 				}
-
+			}
 
 		}
 	}
@@ -298,7 +290,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMClassdiagram(classdiagram *
 
 	DeleteORMClassdiagram(allORMStoreStruct.db, classdiagram)
 }
-
 
 func DeleteORMClassdiagram(
 	db *gorm.DB,

@@ -2,7 +2,7 @@
 package api
 
 import (
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 // APIGateStruct is the implementation of the APIGateImplCallback interface

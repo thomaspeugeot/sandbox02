@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/orm"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type WasherSingloton struct {
 	Callback WasherCallbackInterface
 }
 
-// WasherCallbackInterface is the interface that must be supported 
+// WasherCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type WasherCallbackInterface interface {
 	PostWasher(washer *models.Washer)
@@ -50,7 +50,7 @@ type WasherInput struct {
 // GetWashers
 //
 // swagger:route GET /washers washers getWashers
-// 
+//
 // Get all washers
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetWashers(c *gin.Context) {
 // PostWasher
 //
 // swagger:route POST /washers washers postWasher
-// 
+//
 // Creates a washer
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetWasher(c *gin.Context) {
 }
 
 // UpdateWasher
-// 
+//
 // swagger:route PATCH /washers/{ID} washers updateWasher
 //
 // Update a washer
@@ -178,7 +178,7 @@ func UpdateWasher(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&washerDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateWasher(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the washerDB
 	c.JSON(http.StatusOK, washerDB)
@@ -251,5 +251,3 @@ func GetWasherMachine(c *gin.Context) {
 
 	c.JSON(http.StatusOK, machineMachine)
 }
-
-

@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // PkgeltAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model pkgeltAPI
 type PkgeltAPI struct {
-
 	models.Pkgelt
 
 	// association fields
-	
+
 }
 
 // PkgeltDB describes a pkgelt in the database
@@ -122,7 +120,6 @@ func ModelToORMPkgeltTranslate(
 			if pkgeltDB, ok := (*map_PkgeltDBID_PkgeltDB)[idx]; ok {
 				// set {{Fieldname}}ID
 
-
 				// set ClassdiagramsIDs reverse pointer to Classdiagram
 				for _, Classdiagram := range pkgelt.Classdiagrams {
 					if ClassdiagramDBID, ok := (*map_ClassdiagramPtr_ClassdiagramDBID)[Classdiagram]; ok {
@@ -146,7 +143,6 @@ func ModelToORMPkgeltTranslate(
 						}
 					}
 				}
-
 
 				query := db.Save(&pkgeltDB)
 				if query.Error != nil {
@@ -259,24 +255,21 @@ func ORMToModelPkgeltTranslate(
 				return err
 			}
 
-
-
-				// parse all ClassdiagramDB and redeem the array of poiners to Pkgelt
-				for _, ClassdiagramDB := range *map_ClassdiagramDBID_ClassdiagramDB {
-					if ClassdiagramDB.Pkgelt_ClassdiagramsDBID == pkgeltDB.ID {
-						Classdiagram := (*map_ClassdiagramDBID_ClassdiagramPtr)[ClassdiagramDB.ID]
-						pkgelt.Classdiagrams = append(pkgelt.Classdiagrams, Classdiagram)
-					}
+			// parse all ClassdiagramDB and redeem the array of poiners to Pkgelt
+			for _, ClassdiagramDB := range *map_ClassdiagramDBID_ClassdiagramDB {
+				if ClassdiagramDB.Pkgelt_ClassdiagramsDBID == pkgeltDB.ID {
+					Classdiagram := (*map_ClassdiagramDBID_ClassdiagramPtr)[ClassdiagramDB.ID]
+					pkgelt.Classdiagrams = append(pkgelt.Classdiagrams, Classdiagram)
 				}
+			}
 
-				// parse all UmlscDB and redeem the array of poiners to Pkgelt
-				for _, UmlscDB := range *map_UmlscDBID_UmlscDB {
-					if UmlscDB.Pkgelt_UmlscsDBID == pkgeltDB.ID {
-						Umlsc := (*map_UmlscDBID_UmlscPtr)[UmlscDB.ID]
-						pkgelt.Umlscs = append(pkgelt.Umlscs, Umlsc)
-					}
+			// parse all UmlscDB and redeem the array of poiners to Pkgelt
+			for _, UmlscDB := range *map_UmlscDBID_UmlscDB {
+				if UmlscDB.Pkgelt_UmlscsDBID == pkgeltDB.ID {
+					Umlsc := (*map_UmlscDBID_UmlscPtr)[UmlscDB.ID]
+					pkgelt.Umlscs = append(pkgelt.Umlscs, Umlsc)
 				}
-
+			}
 
 		}
 	}
@@ -315,7 +308,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMPkgelt(pkgelt *models.Pkgel
 
 	DeleteORMPkgelt(allORMStoreStruct.db, pkgelt)
 }
-
 
 func DeleteORMPkgelt(
 	db *gorm.DB,

@@ -1,8 +1,8 @@
 package diagrams
 
 import (
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
-	uml "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	uml "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 var Diagramme_UML_Laundromat uml.Classdiagram = uml.Classdiagram{

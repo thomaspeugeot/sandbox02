@@ -49,7 +49,7 @@ var MapExpToType map[string]string
 var imports string = `package diagrams
 
 import (
-	uml "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	uml "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 	"{{Imports}}"
 )
 

@@ -9,17 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
-	target_engine "github.com/thomaspeugeot/metabaron/examples/laundromat/go/engine"
+	target_engine "github.com/thomaspeugeot/sandbox02/laundromat/go/engine"
 
-	target_controllers "github.com/thomaspeugeot/metabaron/examples/laundromat/go/controllers"
-	target_orm "github.com/thomaspeugeot/metabaron/examples/laundromat/go/orm"
+	target_controllers "github.com/thomaspeugeot/sandbox02/laundromat/go/controllers"
+	target_orm "github.com/thomaspeugeot/sandbox02/laundromat/go/orm"
 
-	gorgo_controllers "github.com/thomaspeugeot/metabaron/libs/gorgo/go/controllers"
-	gorgo_orm "github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	gorgo_controllers "github.com/thomaspeugeot/sandbox02/gorgo/go/controllers"
+	gorgo_orm "github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
-	animah_controllers "github.com/thomaspeugeot/metabaron/libs/animah/go/controllers"
-	animah_models "github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	animah_orm "github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	animah_controllers "github.com/thomaspeugeot/sandbox02/animah/go/controllers"
+	animah_models "github.com/thomaspeugeot/sandbox02/animah/go/models"
+	animah_orm "github.com/thomaspeugeot/sandbox02/animah/go/orm"
 )
 
 var (

@@ -2,34 +2,31 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 // WasherAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model washerAPI
 type WasherAPI struct {
-
 	models.Washer
 
 	// association fields
-	
+
 	// field Machine is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable a GORM `HAS ONE` association
 	MachineID *uint
 
 	// the associated Struct has a Name field, therefore it is generated to compute views with this relation
 	MachineName string
-
 }
 
 // WasherDB describes a washer in the database
@@ -135,8 +132,6 @@ func ModelToORMWasherTranslate(
 						washerDB.MachineID = &machineId
 					}
 				}
-
-
 
 				query := db.Save(&washerDB)
 				if query.Error != nil {
@@ -249,13 +244,10 @@ func ORMToModelWasherTranslate(
 				return err
 			}
 
-
-				// Machine field
-				if washerDB.MachineID != nil {
-					washer.Machine = (*map_MachineDBID_MachinePtr)[*(washerDB.MachineID)]
-				}
-
-
+			// Machine field
+			if washerDB.MachineID != nil {
+				washer.Machine = (*map_MachineDBID_MachinePtr)[*(washerDB.MachineID)]
+			}
 
 		}
 	}
@@ -294,7 +286,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMWasher(washer *models.Washe
 
 	DeleteORMWasher(allORMStoreStruct.db, washer)
 }
-
 
 func DeleteORMWasher(
 	db *gorm.DB,

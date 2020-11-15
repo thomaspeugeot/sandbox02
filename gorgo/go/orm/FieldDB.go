@@ -2,30 +2,27 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // FieldAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model fieldAPI
 type FieldAPI struct {
-
 	models.Field
 
 	// association fields
-	
+
 	// ID generated for the implementation of the field Field{}.Fields []*Classshape
 	Classshape_FieldsDBID uint
-
 }
 
 // FieldDB describes a field in the database
@@ -124,8 +121,6 @@ func ModelToORMFieldTranslate(
 			// fetch matching fieldDB
 			if fieldDB, ok := (*map_FieldDBID_FieldDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&fieldDB)
 				if query.Error != nil {
@@ -238,9 +233,6 @@ func ORMToModelFieldTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -278,7 +270,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMField(field *models.Field) 
 
 	DeleteORMField(allORMStoreStruct.db, field)
 }
-
 
 func DeleteORMField(
 	db *gorm.DB,

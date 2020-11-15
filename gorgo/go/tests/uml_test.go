@@ -3,9 +3,9 @@ package tests
 import (
 	"testing"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/tests/geometry/diagrams"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/tests/geometry/diagrams"
 )
 
 func TestSerializeToAllModels(t *testing.T) {

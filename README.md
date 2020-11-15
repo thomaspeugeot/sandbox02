@@ -50,3 +50,19 @@ ng build gorgo
 ng build gorgodiagrams
 ```
 
+### laundromat library
+```
+cd laundromat/ng
+npm install
+ng build laundromat
+cd ../..
+```
+
+## application laundromat
+
+```
+cd laundromat/ng
+ng serve
+```
+
+

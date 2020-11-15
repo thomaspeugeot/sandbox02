@@ -1,8 +1,8 @@
 package diagrams
 
 import (
-	uml "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/tests/geometry/models"
+	uml "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/tests/geometry/models"
 )
 
 var Diagram1 uml.Classdiagram = uml.Classdiagram{
@@ -13,7 +13,7 @@ var Diagram1 uml.Classdiagram = uml.Classdiagram{
 				X: 20.000000,
 				Y: 80.000000,
 			},
-			Width: 240.000000,
+			Width:  240.000000,
 			Heigth: 48.000000,
 			Links: []*uml.Link{
 				{
@@ -38,7 +38,7 @@ var Diagram1 uml.Classdiagram = uml.Classdiagram{
 				X: 500.000000,
 				Y: 90.000000,
 			},
-			Width: 240.000000,
+			Width:  240.000000,
 			Heigth: 78.000000,
 			Fields: []*uml.Field{
 				{
@@ -51,4 +51,3 @@ var Diagram1 uml.Classdiagram = uml.Classdiagram{
 		},
 	},
 }
-

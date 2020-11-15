@@ -4,7 +4,7 @@ package api
 import (
 	"errors"
 
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 // ActionAPI is the twin in the "api" namespace of Action of the "models" namespace

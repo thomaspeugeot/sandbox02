@@ -7,9 +7,9 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/controllers"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	"github.com/thomaspeugeot/sandbox02/animah/go/controllers"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/orm"
 )
 
 var (
@@ -68,6 +68,6 @@ func main() {
 		models.EngineSingloton.Run()
 	}
 
-	// r.StaticFS("/static/", http.Dir("/Users/thomaspeugeot/go/src/github.com/thomaspeugeot/metabaron/libs/animah/ng/dist/ng"))
+	// r.StaticFS("/static/", http.Dir("/Users/thomaspeugeot/go/src/github.com/thomaspeugeot/sandbox02/animah/ng/dist/ng"))
 
 }

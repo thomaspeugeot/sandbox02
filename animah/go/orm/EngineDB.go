@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 // EngineAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model engineAPI
 type EngineAPI struct {
-
 	models.Engine
 
 	// association fields
-	
+
 }
 
 // EngineDB describes a engine in the database
@@ -121,8 +119,6 @@ func ModelToORMEngineTranslate(
 			// fetch matching engineDB
 			if engineDB, ok := (*map_EngineDBID_EngineDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&engineDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelEngineTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMEngine(engine *models.Engin
 
 	DeleteORMEngine(allORMStoreStruct.db, engine)
 }
-
 
 func DeleteORMEngine(
 	db *gorm.DB,

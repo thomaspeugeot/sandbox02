@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type LinkSingloton struct {
 	Callback LinkCallbackInterface
 }
 
-// LinkCallbackInterface is the interface that must be supported 
+// LinkCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type LinkCallbackInterface interface {
 	PostLink(link *models.Link)
@@ -50,7 +50,7 @@ type LinkInput struct {
 // GetLinks
 //
 // swagger:route GET /links links getLinks
-// 
+//
 // Get all links
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetLinks(c *gin.Context) {
 // PostLink
 //
 // swagger:route POST /links links postLink
-// 
+//
 // Creates a link
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetLink(c *gin.Context) {
 }
 
 // UpdateLink
-// 
+//
 // swagger:route PATCH /links/{ID} links updateLink
 //
 // Update a link
@@ -178,7 +178,7 @@ func UpdateLink(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&linkDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateLink(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the linkDB
 	c.JSON(http.StatusOK, linkDB)
@@ -252,7 +252,6 @@ func GetLinkMiddlevertice(c *gin.Context) {
 	c.JSON(http.StatusOK, verticeMiddlevertice)
 }
 
-
 // GetLinkClassshapesViaLinks swagger:route GET /links/{ID}/classshapesvialinks links getLinkClassshapesViaLinks
 //
 // Gets classshapes of link via field Links of Classshape.
@@ -276,7 +275,7 @@ func GetLinkClassshapesViaLinks(c *gin.Context) {
 	// get classshapes
 	var classshapeDBs orm.ClassshapeDBs
 	columnName := gorm.ToColumnName("LinksID")
-	query := db.Where( genQuery(columnName), link.ID).Find(&classshapeDBs)
+	query := db.Where(genQuery(columnName), link.ID).Find(&classshapeDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -288,4 +287,3 @@ func GetLinkClassshapesViaLinks(c *gin.Context) {
 
 	c.JSON(http.StatusOK, classshapeDBs)
 }
-

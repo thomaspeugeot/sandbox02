@@ -6,16 +6,16 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/events"
-	target_models "github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
-	target_orm "github.com/thomaspeugeot/metabaron/examples/laundromat/go/orm"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/events"
+	target_models "github.com/thomaspeugeot/sandbox02/laundromat/go/models"
+	target_orm "github.com/thomaspeugeot/sandbox02/laundromat/go/orm"
 
-	gorgo_models "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	gorgo_orm "github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	gorgo_models "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	gorgo_orm "github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
-	animah_controllers "github.com/thomaspeugeot/metabaron/libs/animah/go/controllers"
-	animah_models "github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	animah_orm "github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	animah_controllers "github.com/thomaspeugeot/sandbox02/animah/go/controllers"
+	animah_models "github.com/thomaspeugeot/sandbox02/animah/go/models"
+	animah_orm "github.com/thomaspeugeot/sandbox02/animah/go/orm"
 )
 
 // EngineSpecific is the callback support for

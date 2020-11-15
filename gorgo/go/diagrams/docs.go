@@ -1,8 +1,8 @@
 package diagrams
 
 import (
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	uml "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	uml "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 var DiagramUMLduUML uml.Classdiagram = uml.Classdiagram{

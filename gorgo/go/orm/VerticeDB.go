@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // VerticeAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model verticeAPI
 type VerticeAPI struct {
-
 	models.Vertice
 
 	// association fields
-	
+
 }
 
 // VerticeDB describes a vertice in the database
@@ -121,8 +119,6 @@ func ModelToORMVerticeTranslate(
 			// fetch matching verticeDB
 			if verticeDB, ok := (*map_VerticeDBID_VerticeDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&verticeDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelVerticeTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMVertice(vertice *models.Ver
 
 	DeleteORMVertice(allORMStoreStruct.db, vertice)
 }
-
 
 func DeleteORMVertice(
 	db *gorm.DB,

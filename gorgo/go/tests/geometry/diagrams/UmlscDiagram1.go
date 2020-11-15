@@ -1,8 +1,8 @@
 package diagrams
 
 import (
-	uml "github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/tests/geometry/models"
+	uml "github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/tests/geometry/models"
 )
 
 var UmlscDiagram1 uml.Umlsc = uml.Umlsc{
@@ -20,4 +20,3 @@ var UmlscDiagram1 uml.Umlsc = uml.Umlsc{
 		},
 	},
 }
-

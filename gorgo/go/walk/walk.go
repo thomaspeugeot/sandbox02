@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/thomaspeugeot/metabaron/go/models"
+	"github.com/thomaspeugeot/sandbox02/gongc/go/models"
 	"golang.org/x/tools/go/packages"
 )
 

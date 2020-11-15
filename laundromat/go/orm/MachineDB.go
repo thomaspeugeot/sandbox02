@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 // MachineAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model machineAPI
 type MachineAPI struct {
-
 	models.Machine
 
 	// association fields
-	
+
 }
 
 // MachineDB describes a machine in the database
@@ -121,8 +119,6 @@ func ModelToORMMachineTranslate(
 			// fetch matching machineDB
 			if machineDB, ok := (*map_MachineDBID_MachineDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&machineDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelMachineTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMMachine(machine *models.Mac
 
 	DeleteORMMachine(allORMStoreStruct.db, machine)
 }
-
 
 func DeleteORMMachine(
 	db *gorm.DB,

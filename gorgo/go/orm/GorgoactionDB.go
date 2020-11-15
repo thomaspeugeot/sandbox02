@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // GorgoactionAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model gorgoactionAPI
 type GorgoactionAPI struct {
-
 	models.Gorgoaction
 
 	// association fields
-	
+
 }
 
 // GorgoactionDB describes a gorgoaction in the database
@@ -121,8 +119,6 @@ func ModelToORMGorgoactionTranslate(
 			// fetch matching gorgoactionDB
 			if gorgoactionDB, ok := (*map_GorgoactionDBID_GorgoactionDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&gorgoactionDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelGorgoactionTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMGorgoaction(gorgoaction *mo
 
 	DeleteORMGorgoaction(allORMStoreStruct.db, gorgoaction)
 }
-
 
 func DeleteORMGorgoaction(
 	db *gorm.DB,

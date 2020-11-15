@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type AgentSingloton struct {
 	Callback AgentCallbackInterface
 }
 
-// AgentCallbackInterface is the interface that must be supported 
+// AgentCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type AgentCallbackInterface interface {
 	PostAgent(agent *models.Agent)
@@ -50,7 +50,7 @@ type AgentInput struct {
 // GetAgents
 //
 // swagger:route GET /agents agents getAgents
-// 
+//
 // Get all agents
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetAgents(c *gin.Context) {
 // PostAgent
 //
 // swagger:route POST /agents agents postAgent
-// 
+//
 // Creates a agent
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetAgent(c *gin.Context) {
 }
 
 // UpdateAgent
-// 
+//
 // swagger:route PATCH /agents/{ID} agents updateAgent
 //
 // Update a agent
@@ -178,7 +178,7 @@ func UpdateAgent(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&agentDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateAgent(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the agentDB
 	c.JSON(http.StatusOK, agentDB)
@@ -251,5 +251,3 @@ func GetAgentEngine(c *gin.Context) {
 
 	c.JSON(http.StatusOK, engineEngine)
 }
-
-

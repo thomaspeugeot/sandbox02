@@ -2,30 +2,27 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // StateAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model stateAPI
 type StateAPI struct {
-
 	models.State
 
 	// association fields
-	
+
 	// ID generated for the implementation of the field State{}.States []*Umlsc
 	Umlsc_StatesDBID uint
-
 }
 
 // StateDB describes a state in the database
@@ -124,8 +121,6 @@ func ModelToORMStateTranslate(
 			// fetch matching stateDB
 			if stateDB, ok := (*map_StateDBID_StateDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&stateDB)
 				if query.Error != nil {
@@ -238,9 +233,6 @@ func ORMToModelStateTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -278,7 +270,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMState(state *models.State) 
 
 	DeleteORMState(allORMStoreStruct.db, state)
 }
-
 
 func DeleteORMState(
 	db *gorm.DB,

@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type ActionSingloton struct {
 	Callback ActionCallbackInterface
 }
 
-// ActionCallbackInterface is the interface that must be supported 
+// ActionCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type ActionCallbackInterface interface {
 	PostAction(action *models.Action)
@@ -50,7 +50,7 @@ type ActionInput struct {
 // GetActions
 //
 // swagger:route GET /actions actions getActions
-// 
+//
 // Get all actions
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetActions(c *gin.Context) {
 // PostAction
 //
 // swagger:route POST /actions actions postAction
-// 
+//
 // Creates a action
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetAction(c *gin.Context) {
 }
 
 // UpdateAction
-// 
+//
 // swagger:route PATCH /actions/{ID} actions updateAction
 //
 // Update a action
@@ -178,7 +178,7 @@ func UpdateAction(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&actionDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateAction(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the actionDB
 	c.JSON(http.StatusOK, actionDB)
@@ -218,5 +218,3 @@ func DeleteAction(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
-
-

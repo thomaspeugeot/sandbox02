@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type ClassshapeSingloton struct {
 	Callback ClassshapeCallbackInterface
 }
 
-// ClassshapeCallbackInterface is the interface that must be supported 
+// ClassshapeCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type ClassshapeCallbackInterface interface {
 	PostClassshape(classshape *models.Classshape)
@@ -50,7 +50,7 @@ type ClassshapeInput struct {
 // GetClassshapes
 //
 // swagger:route GET /classshapes classshapes getClassshapes
-// 
+//
 // Get all classshapes
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetClassshapes(c *gin.Context) {
 // PostClassshape
 //
 // swagger:route POST /classshapes classshapes postClassshape
-// 
+//
 // Creates a classshape
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetClassshape(c *gin.Context) {
 }
 
 // UpdateClassshape
-// 
+//
 // swagger:route PATCH /classshapes/{ID} classshapes updateClassshape
 //
 // Update a classshape
@@ -178,7 +178,7 @@ func UpdateClassshape(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&classshapeDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateClassshape(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the classshapeDB
 	c.JSON(http.StatusOK, classshapeDB)
@@ -252,7 +252,6 @@ func GetClassshapePosition(c *gin.Context) {
 	c.JSON(http.StatusOK, positionPosition)
 }
 
-
 // GetClassshapeClassdiagramsViaClassshapes swagger:route GET /classshapes/{ID}/classdiagramsviaclassshapes classshapes getClassshapeClassdiagramsViaClassshapes
 //
 // Gets classdiagrams of classshape via field Classshapes of Classdiagram.
@@ -276,7 +275,7 @@ func GetClassshapeClassdiagramsViaClassshapes(c *gin.Context) {
 	// get classdiagrams
 	var classdiagramDBs orm.ClassdiagramDBs
 	columnName := gorm.ToColumnName("ClassshapesID")
-	query := db.Where( genQuery(columnName), classshape.ID).Find(&classdiagramDBs)
+	query := db.Where(genQuery(columnName), classshape.ID).Find(&classdiagramDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -288,4 +287,3 @@ func GetClassshapeClassdiagramsViaClassshapes(c *gin.Context) {
 
 	c.JSON(http.StatusOK, classdiagramDBs)
 }
-

@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type GorgoactionSingloton struct {
 	Callback GorgoactionCallbackInterface
 }
 
-// GorgoactionCallbackInterface is the interface that must be supported 
+// GorgoactionCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type GorgoactionCallbackInterface interface {
 	PostGorgoaction(gorgoaction *models.Gorgoaction)
@@ -50,7 +50,7 @@ type GorgoactionInput struct {
 // GetGorgoactions
 //
 // swagger:route GET /gorgoactions gorgoactions getGorgoactions
-// 
+//
 // Get all gorgoactions
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetGorgoactions(c *gin.Context) {
 // PostGorgoaction
 //
 // swagger:route POST /gorgoactions gorgoactions postGorgoaction
-// 
+//
 // Creates a gorgoaction
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetGorgoaction(c *gin.Context) {
 }
 
 // UpdateGorgoaction
-// 
+//
 // swagger:route PATCH /gorgoactions/{ID} gorgoactions updateGorgoaction
 //
 // Update a gorgoaction
@@ -178,7 +178,7 @@ func UpdateGorgoaction(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&gorgoactionDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateGorgoaction(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the gorgoactionDB
 	c.JSON(http.StatusOK, gorgoactionDB)
@@ -218,5 +218,3 @@ func DeleteGorgoaction(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
-
-

@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // PositionAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model positionAPI
 type PositionAPI struct {
-
 	models.Position
 
 	// association fields
-	
+
 }
 
 // PositionDB describes a position in the database
@@ -121,8 +119,6 @@ func ModelToORMPositionTranslate(
 			// fetch matching positionDB
 			if positionDB, ok := (*map_PositionDBID_PositionDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&positionDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelPositionTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMPosition(position *models.P
 
 	DeleteORMPosition(allORMStoreStruct.db, position)
 }
-
 
 func DeleteORMPosition(
 	db *gorm.DB,

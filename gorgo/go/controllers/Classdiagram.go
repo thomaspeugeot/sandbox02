@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type ClassdiagramSingloton struct {
 	Callback ClassdiagramCallbackInterface
 }
 
-// ClassdiagramCallbackInterface is the interface that must be supported 
+// ClassdiagramCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type ClassdiagramCallbackInterface interface {
 	PostClassdiagram(classdiagram *models.Classdiagram)
@@ -50,7 +50,7 @@ type ClassdiagramInput struct {
 // GetClassdiagrams
 //
 // swagger:route GET /classdiagrams classdiagrams getClassdiagrams
-// 
+//
 // Get all classdiagrams
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetClassdiagrams(c *gin.Context) {
 // PostClassdiagram
 //
 // swagger:route POST /classdiagrams classdiagrams postClassdiagram
-// 
+//
 // Creates a classdiagram
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetClassdiagram(c *gin.Context) {
 }
 
 // UpdateClassdiagram
-// 
+//
 // swagger:route PATCH /classdiagrams/{ID} classdiagrams updateClassdiagram
 //
 // Update a classdiagram
@@ -178,7 +178,7 @@ func UpdateClassdiagram(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&classdiagramDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateClassdiagram(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the classdiagramDB
 	c.JSON(http.StatusOK, classdiagramDB)
@@ -219,7 +219,6 @@ func DeleteClassdiagram(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetClassdiagramPkgeltsViaClassdiagrams swagger:route GET /classdiagrams/{ID}/pkgeltsviaclassdiagrams classdiagrams getClassdiagramPkgeltsViaClassdiagrams
 //
 // Gets pkgelts of classdiagram via field Classdiagrams of Pkgelt.
@@ -243,7 +242,7 @@ func GetClassdiagramPkgeltsViaClassdiagrams(c *gin.Context) {
 	// get pkgelts
 	var pkgeltDBs orm.PkgeltDBs
 	columnName := gorm.ToColumnName("ClassdiagramsID")
-	query := db.Where( genQuery(columnName), classdiagram.ID).Find(&pkgeltDBs)
+	query := db.Where(genQuery(columnName), classdiagram.ID).Find(&pkgeltDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetClassdiagramPkgeltsViaClassdiagrams(c *gin.Context) {
 
 	c.JSON(http.StatusOK, pkgeltDBs)
 }
-

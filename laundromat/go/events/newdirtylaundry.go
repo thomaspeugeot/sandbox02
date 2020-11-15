@@ -3,7 +3,7 @@ package events
 import (
 	"time"
 
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 const LAUNDRY_LOAD_PER_EVENT = 8           // 8 kg

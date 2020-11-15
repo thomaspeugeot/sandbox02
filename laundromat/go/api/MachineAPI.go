@@ -4,7 +4,7 @@ package api
 import (
 	"errors"
 
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 // MachineAPI is the twin in the "api" namespace of Machine of the "models" namespace

@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/orm"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type EngineSingloton struct {
 	Callback EngineCallbackInterface
 }
 
-// EngineCallbackInterface is the interface that must be supported 
+// EngineCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type EngineCallbackInterface interface {
 	PostEngine(engine *models.Engine)
@@ -50,7 +50,7 @@ type EngineInput struct {
 // GetEngines
 //
 // swagger:route GET /engines engines getEngines
-// 
+//
 // Get all engines
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetEngines(c *gin.Context) {
 // PostEngine
 //
 // swagger:route POST /engines engines postEngine
-// 
+//
 // Creates a engine
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetEngine(c *gin.Context) {
 }
 
 // UpdateEngine
-// 
+//
 // swagger:route PATCH /engines/{ID} engines updateEngine
 //
 // Update a engine
@@ -178,7 +178,7 @@ func UpdateEngine(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&engineDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateEngine(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the engineDB
 	c.JSON(http.StatusOK, engineDB)
@@ -219,7 +219,6 @@ func DeleteEngine(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetEngineAgentsViaEngine swagger:route GET /engines/{ID}/agentsviaengine engines getEngineAgentsViaEngine
 //
 // Gets agents of engine via field Engine of Agent.
@@ -243,7 +242,7 @@ func GetEngineAgentsViaEngine(c *gin.Context) {
 	// get agents
 	var agentDBs orm.AgentDBs
 	columnName := gorm.ToColumnName("EngineID")
-	query := db.Where( genQuery(columnName), engine.ID).Find(&agentDBs)
+	query := db.Where(genQuery(columnName), engine.ID).Find(&agentDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetEngineAgentsViaEngine(c *gin.Context) {
 
 	c.JSON(http.StatusOK, agentDBs)
 }
-

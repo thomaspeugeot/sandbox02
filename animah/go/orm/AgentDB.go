@@ -2,34 +2,31 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 // AgentAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model agentAPI
 type AgentAPI struct {
-
 	models.Agent
 
 	// association fields
-	
+
 	// field Engine is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable a GORM `HAS ONE` association
 	EngineID *uint
 
 	// the associated Struct has a Name field, therefore it is generated to compute views with this relation
 	EngineName string
-
 }
 
 // AgentDB describes a agent in the database
@@ -135,8 +132,6 @@ func ModelToORMAgentTranslate(
 						agentDB.EngineID = &engineId
 					}
 				}
-
-
 
 				query := db.Save(&agentDB)
 				if query.Error != nil {
@@ -249,13 +244,10 @@ func ORMToModelAgentTranslate(
 				return err
 			}
 
-
-				// Engine field
-				if agentDB.EngineID != nil {
-					agent.Engine = (*map_EngineDBID_EnginePtr)[*(agentDB.EngineID)]
-				}
-
-
+			// Engine field
+			if agentDB.EngineID != nil {
+				agent.Engine = (*map_EngineDBID_EnginePtr)[*(agentDB.EngineID)]
+			}
 
 		}
 	}
@@ -294,7 +286,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMAgent(agent *models.Agent) 
 
 	DeleteORMAgent(allORMStoreStruct.db, agent)
 }
-
 
 func DeleteORMAgent(
 	db *gorm.DB,

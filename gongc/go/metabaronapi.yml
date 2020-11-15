@@ -1,0 +1,641 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  ActionDB:
+    description: Action describres a action
+    properties:
+      ActionType:
+        description: The type of the action
+        enum:
+        - Walk
+        - DeleteStructAndFields
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Action
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    type: object
+    x-go-name: Action
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  ActionModel:
+    description: |-
+      ActionModel is a representation of a action of a metabaron Action
+      a metabaron action
+    properties:
+      ActionType:
+        description: The type of the action
+        enum:
+        - Walk
+        - DeleteStructAndFields
+        type: string
+      Name:
+        description: The Name of the Action
+        type: string
+    type: object
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  DiagramDB:
+    description: Diagram describres a diagram
+    properties:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Struct Diagram
+        type: string
+      Storage:
+        description: The Storage as a json string
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    type: object
+    x-go-name: Diagram
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  DiagramModel:
+    description: DiagramModel is a representation of a diagram
+    properties:
+      Name:
+        description: The Name of the Struct Diagram
+        type: string
+      Storage:
+        description: The Storage as a json string
+        type: string
+    type: object
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  FieldDB:
+    description: Field describres a field
+    properties:
+      AssociatedStructID:
+        description: if Kind is a Ptr or an Array, the Struct behind, nil otherwise
+        format: uint64
+        type: integer
+      AssociatedStructName:
+        description: The Name of the Associated Struct
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Kind:
+        $ref: '#/definitions/Kind'
+      Name:
+        description: The Name of the Struct Field
+        type: string
+      StructID:
+        description: the Struct it belongs to
+        format: uint64
+        type: integer
+      StructName:
+        description: the Struct Name it belongs to
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    type: object
+    x-go-name: Field
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  FieldModel:
+    description: |-
+      FieldModel is a representation of a field of a metabaron Field
+      a metabaron struct is a struct with field such as :
+      a basic type (string, int, ...)
+      a pointer to a metabaron struct (one ZeroOrOneRelationship)
+      a collection of pointers to a metabaron struct
+    properties:
+      AssociatedStructID:
+        description: if Kind is a Ptr or an Array, the Struct behind, nil otherwise
+        format: uint64
+        type: integer
+      AssociatedStructName:
+        description: The Name of the Associated Struct
+        type: string
+      Kind:
+        $ref: '#/definitions/Kind'
+      Name:
+        description: The Name of the Struct Field
+        type: string
+      StructID:
+        description: the Struct it belongs to
+        format: uint64
+        type: integer
+      StructName:
+        description: the Struct Name it belongs to
+        type: string
+    type: object
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  Kind:
+    description: The zero Kind is not a valid kind.
+    format: uint64
+    title: A Kind represents the specific kind of type that a Type represents.
+    type: integer
+    x-go-package: reflect
+  structDB:
+    description: Struct describres a struct
+    properties:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      Field:
+        description: The Attributes list (not working at the moment, ...)
+        items:
+          $ref: '#/definitions/FieldDB'
+        type: array
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Type
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    type: object
+    x-go-name: Struct
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+  structModel:
+    description: StructModel is a representation of go Struct
+    properties:
+      Field:
+        description: The Attributes list (not working at the moment, ...)
+        items:
+          $ref: '#/definitions/FieldDB'
+        type: array
+      Name:
+        description: The Name of the Type
+        type: string
+    type: object
+    x-go-name: StructModel
+    x-go-package: github.com/thomaspeugeot/metabaron/back/metabaron/models
+host: localhost:8080
+info:
+  description: Metabaron exposes types of a package.
+  title: metabaron backend API
+  version: "0.1"
+paths:
+  /actions:
+    post:
+      consumes:
+      - application/json
+      description: Creates a action
+      operationId: postAction
+      parameters:
+      - description: The Action to submit or modify
+        in: body
+        name: ActionModel
+        schema:
+          $ref: '#/definitions/ActionModel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/actionResponse'
+      tags:
+      - actions
+  /diagrams:
+    get:
+      description: Get all diagrams
+      operationId: getDiagrams
+      responses:
+        "200":
+          $ref: '#/responses/diagramsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - diagrams
+    post:
+      consumes:
+      - application/json
+      description: Creates a diagram
+      operationId: postDiagram
+      parameters:
+      - description: The Diagram to submit or modify
+        in: body
+        name: DiagramModel
+        schema:
+          $ref: '#/definitions/DiagramModel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/diagramResponse'
+      tags:
+      - diagrams
+  /diagrams/{ID}:
+    delete:
+      description: Delete a diagram
+      operationId: deleteDiagram
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - diagrams
+    get:
+      operationId: getDiagram
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/diagramResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a diagram.
+      tags:
+      - diagrams
+    patch:
+      description: Update a diagram
+      operationId: updateDiagram
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Diagram to submit or modify
+        in: body
+        name: DiagramModel
+        schema:
+          $ref: '#/definitions/DiagramModel'
+      responses:
+        "200":
+          $ref: '#/responses/diagramResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - diagrams
+  /fields:
+    get:
+      description: Get all fields
+      operationId: getFields
+      responses:
+        "200":
+          $ref: '#/responses/fieldsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - fields
+    post:
+      consumes:
+      - application/json
+      description: Creates a field
+      operationId: postField
+      parameters:
+      - description: The Field to submit or modify
+        in: body
+        name: FieldModel
+        schema:
+          $ref: '#/definitions/FieldModel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/fieldResponse'
+      tags:
+      - fields
+  /fields/{ID}:
+    delete:
+      description: Delete a field
+      operationId: deleteField
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - fields
+    get:
+      operationId: getField
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/fieldResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a field.
+      tags:
+      - fields
+    patch:
+      description: Update a field
+      operationId: updateField
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Field to submit or modify
+        in: body
+        name: FieldModel
+        schema:
+          $ref: '#/definitions/FieldModel'
+      responses:
+        "200":
+          $ref: '#/responses/fieldResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - fields
+  /structs:
+    get:
+      description: Get all structs
+      operationId: getStructs
+      responses:
+        "200":
+          $ref: '#/responses/structsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - structs
+    post:
+      consumes:
+      - application/json
+      description: Creates a struct
+      operationId: postStruct
+      parameters:
+      - description: The Struct to submit or modify
+        in: body
+        name: StructModel
+        schema:
+          $ref: '#/definitions/structModel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/structResponse'
+      tags:
+      - structs
+  /structs/{ID}:
+    delete:
+      description: Delete a _struct
+      operationId: deleteStruct
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - structs
+    get:
+      operationId: getStruct
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/structResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a struct.
+      tags:
+      - structs
+    patch:
+      description: Update a struct
+      operationId: updateStruct
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Struct to submit or modify
+        in: body
+        name: StructModel
+        schema:
+          $ref: '#/definitions/structModel'
+      responses:
+        "200":
+          $ref: '#/responses/structResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - structs
+produces:
+- application/json
+responses:
+  actionResponse:
+    description: ActionResponse provides response
+    headers:
+      ActionType:
+        description: The type of the action
+        enum:
+        - - Walk
+          - DeleteStructAndFields
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Action
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+  actionsResponse:
+    description: Actions arrays actions
+    schema:
+      items:
+        $ref: '#/definitions/ActionDB'
+      type: array
+  diagramResponse:
+    description: DiagramResponse provides response
+    headers:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Struct Diagram
+        type: string
+      Storage:
+        description: The Storage as a json string
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+  diagramsResponse:
+    description: Diagrams arrays diagrams
+    schema:
+      items:
+        $ref: '#/definitions/DiagramDB'
+      type: array
+  fieldResponse:
+    description: FieldResponse provides response
+    headers:
+      AssociatedStructID:
+        description: if Kind is a Ptr or an Array, the Struct behind, nil otherwise
+        format: uint64
+        type: integer
+      AssociatedStructName:
+        description: The Name of the Associated Struct
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Kind:
+        description: |-
+          the Kind of the Struct Field
+          for a metabaron struct
+      Name:
+        description: The Name of the Struct Field
+        type: string
+      StructID:
+        description: the Struct it belongs to
+        format: uint64
+        type: integer
+      StructName:
+        description: the Struct Name it belongs to
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    schema:
+      $ref: '#/definitions/Kind'
+  fieldsResponse:
+    description: Fields arrays fields
+    schema:
+      items:
+        $ref: '#/definitions/FieldDB'
+      type: array
+  genericError:
+    description: |-
+      A GenericError is the default error message that is generated.
+      For certain status codes there are more appropriate error structures.
+    schema:
+      properties:
+        code:
+          format: int32
+          type: integer
+          x-go-name: Code
+        message:
+          type: string
+          x-go-name: Message
+      type: object
+  structResponse:
+    description: StructResponse provides response
+    headers:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      Field:
+        description: The Attributes list (not working at the moment, ...)
+        items:
+          $ref: '#/definitions/FieldDB'
+        type: array
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        description: The Name of the Type
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+  structsResponse:
+    description: Structs arrays structs
+    schema:
+      items:
+        $ref: '#/definitions/structDB'
+      type: array
+  validationError:
+    description: |-
+      A ValidationError is an that is generated for validation failures.
+      It has the same fields as a generic error but adds a Field property.
+    schema:
+      properties:
+        code:
+          format: int32
+          type: integer
+          x-go-name: Code
+        field:
+          type: string
+          x-go-name: Field
+        message:
+          type: string
+          x-go-name: Message
+      type: object
+schemes:
+- http
+securityDefinitions:
+  basic:
+    type: basic
+swagger: "2.0"

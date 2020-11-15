@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/animah/go/models"
+	"github.com/thomaspeugeot/sandbox02/animah/go/models"
 )
 
 // ActionAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model actionAPI
 type ActionAPI struct {
-
 	models.Action
 
 	// association fields
-	
+
 }
 
 // ActionDB describes a action in the database
@@ -121,8 +119,6 @@ func ModelToORMActionTranslate(
 			// fetch matching actionDB
 			if actionDB, ok := (*map_ActionDBID_ActionDB)[idx]; ok {
 				// set {{Fieldname}}ID
-
-
 
 				query := db.Save(&actionDB)
 				if query.Error != nil {
@@ -235,9 +231,6 @@ func ORMToModelActionTranslate(
 				return err
 			}
 
-
-
-
 		}
 	}
 
@@ -275,7 +268,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMAction(action *models.Actio
 
 	DeleteORMAction(allORMStoreStruct.db, action)
 }
-
 
 func DeleteORMAction(
 	db *gorm.DB,

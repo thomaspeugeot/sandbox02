@@ -2,27 +2,25 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // ClassshapeAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model classshapeAPI
 type ClassshapeAPI struct {
-
 	models.Classshape
 
 	// association fields
-	
+
 	// field Position is a pointer to another Struct (optional or 0..1)
 	// This field is generated into another field to enable a GORM `HAS ONE` association
 	PositionID *uint
@@ -32,7 +30,6 @@ type ClassshapeAPI struct {
 
 	// ID generated for the implementation of the field Classshape{}.Classshapes []*Classdiagram
 	Classdiagram_ClassshapesDBID uint
-
 }
 
 // ClassshapeDB describes a classshape in the database
@@ -139,7 +136,6 @@ func ModelToORMClassshapeTranslate(
 					}
 				}
 
-
 				// set FieldsIDs reverse pointer to Field
 				for _, Field := range classshape.Fields {
 					if FieldDBID, ok := (*map_FieldPtr_FieldDBID)[Field]; ok {
@@ -163,7 +159,6 @@ func ModelToORMClassshapeTranslate(
 						}
 					}
 				}
-
 
 				query := db.Save(&classshapeDB)
 				if query.Error != nil {
@@ -276,29 +271,26 @@ func ORMToModelClassshapeTranslate(
 				return err
 			}
 
+			// Position field
+			if classshapeDB.PositionID != nil {
+				classshape.Position = (*map_PositionDBID_PositionPtr)[*(classshapeDB.PositionID)]
+			}
 
-				// Position field
-				if classshapeDB.PositionID != nil {
-					classshape.Position = (*map_PositionDBID_PositionPtr)[*(classshapeDB.PositionID)]
+			// parse all FieldDB and redeem the array of poiners to Classshape
+			for _, FieldDB := range *map_FieldDBID_FieldDB {
+				if FieldDB.Classshape_FieldsDBID == classshapeDB.ID {
+					Field := (*map_FieldDBID_FieldPtr)[FieldDB.ID]
+					classshape.Fields = append(classshape.Fields, Field)
 				}
+			}
 
-
-				// parse all FieldDB and redeem the array of poiners to Classshape
-				for _, FieldDB := range *map_FieldDBID_FieldDB {
-					if FieldDB.Classshape_FieldsDBID == classshapeDB.ID {
-						Field := (*map_FieldDBID_FieldPtr)[FieldDB.ID]
-						classshape.Fields = append(classshape.Fields, Field)
-					}
+			// parse all LinkDB and redeem the array of poiners to Classshape
+			for _, LinkDB := range *map_LinkDBID_LinkDB {
+				if LinkDB.Classshape_LinksDBID == classshapeDB.ID {
+					Link := (*map_LinkDBID_LinkPtr)[LinkDB.ID]
+					classshape.Links = append(classshape.Links, Link)
 				}
-
-				// parse all LinkDB and redeem the array of poiners to Classshape
-				for _, LinkDB := range *map_LinkDBID_LinkDB {
-					if LinkDB.Classshape_LinksDBID == classshapeDB.ID {
-						Link := (*map_LinkDBID_LinkPtr)[LinkDB.ID]
-						classshape.Links = append(classshape.Links, Link)
-					}
-				}
-
+			}
 
 		}
 	}
@@ -337,7 +329,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMClassshape(classshape *mode
 
 	DeleteORMClassshape(allORMStoreStruct.db, classshape)
 }
-
 
 func DeleteORMClassshape(
 	db *gorm.DB,

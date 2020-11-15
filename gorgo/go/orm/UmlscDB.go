@@ -2,30 +2,27 @@
 package orm
 
 import (
-	
 	"errors"
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
 )
 
 // UmlscAPI is the input in POST API
-// 
+//
 // for POST, API, one needs the fields of the model as well as the fields
 // from associations ("Has One" and "Has Many") that are generated to
 // fullfill the ORM requirements for associations
 //
 // swagger:model umlscAPI
 type UmlscAPI struct {
-
 	models.Umlsc
 
 	// association fields
-	
+
 	// ID generated for the implementation of the field Umlsc{}.Umlscs []*Pkgelt
 	Pkgelt_UmlscsDBID uint
-
 }
 
 // UmlscDB describes a umlsc in the database
@@ -125,7 +122,6 @@ func ModelToORMUmlscTranslate(
 			if umlscDB, ok := (*map_UmlscDBID_UmlscDB)[idx]; ok {
 				// set {{Fieldname}}ID
 
-
 				// set StatesIDs reverse pointer to State
 				for _, State := range umlsc.States {
 					if StateDBID, ok := (*map_StatePtr_StateDBID)[State]; ok {
@@ -137,7 +133,6 @@ func ModelToORMUmlscTranslate(
 						}
 					}
 				}
-
 
 				query := db.Save(&umlscDB)
 				if query.Error != nil {
@@ -250,16 +245,13 @@ func ORMToModelUmlscTranslate(
 				return err
 			}
 
-
-
-				// parse all StateDB and redeem the array of poiners to Umlsc
-				for _, StateDB := range *map_StateDBID_StateDB {
-					if StateDB.Umlsc_StatesDBID == umlscDB.ID {
-						State := (*map_StateDBID_StatePtr)[StateDB.ID]
-						umlsc.States = append(umlsc.States, State)
-					}
+			// parse all StateDB and redeem the array of poiners to Umlsc
+			for _, StateDB := range *map_StateDBID_StateDB {
+				if StateDB.Umlsc_StatesDBID == umlscDB.ID {
+					State := (*map_StateDBID_StatePtr)[StateDB.ID]
+					umlsc.States = append(umlsc.States, State)
 				}
-
+			}
 
 		}
 	}
@@ -298,7 +290,6 @@ func (allORMStoreStruct *AllORMStoreStruct) DeleteORMUmlsc(umlsc *models.Umlsc) 
 
 	DeleteORMUmlsc(allORMStoreStruct.db, umlsc)
 }
-
 
 func DeleteORMUmlsc(
 	db *gorm.DB,

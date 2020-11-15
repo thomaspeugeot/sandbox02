@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type UmlscSingloton struct {
 	Callback UmlscCallbackInterface
 }
 
-// UmlscCallbackInterface is the interface that must be supported 
+// UmlscCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type UmlscCallbackInterface interface {
 	PostUmlsc(umlsc *models.Umlsc)
@@ -50,7 +50,7 @@ type UmlscInput struct {
 // GetUmlscs
 //
 // swagger:route GET /umlscs umlscs getUmlscs
-// 
+//
 // Get all umlscs
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetUmlscs(c *gin.Context) {
 // PostUmlsc
 //
 // swagger:route POST /umlscs umlscs postUmlsc
-// 
+//
 // Creates a umlsc
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetUmlsc(c *gin.Context) {
 }
 
 // UpdateUmlsc
-// 
+//
 // swagger:route PATCH /umlscs/{ID} umlscs updateUmlsc
 //
 // Update a umlsc
@@ -178,7 +178,7 @@ func UpdateUmlsc(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&umlscDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateUmlsc(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the umlscDB
 	c.JSON(http.StatusOK, umlscDB)
@@ -219,7 +219,6 @@ func DeleteUmlsc(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetUmlscPkgeltsViaUmlscs swagger:route GET /umlscs/{ID}/pkgeltsviaumlscs umlscs getUmlscPkgeltsViaUmlscs
 //
 // Gets pkgelts of umlsc via field Umlscs of Pkgelt.
@@ -243,7 +242,7 @@ func GetUmlscPkgeltsViaUmlscs(c *gin.Context) {
 	// get pkgelts
 	var pkgeltDBs orm.PkgeltDBs
 	columnName := gorm.ToColumnName("UmlscsID")
-	query := db.Where( genQuery(columnName), umlsc.ID).Find(&pkgeltDBs)
+	query := db.Where(genQuery(columnName), umlsc.ID).Find(&pkgeltDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetUmlscPkgeltsViaUmlscs(c *gin.Context) {
 
 	c.JSON(http.StatusOK, pkgeltDBs)
 }
-

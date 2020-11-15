@@ -8,11 +8,11 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/controllers"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/controllers"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/tests/geometry/diagrams"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/tests/geometry/diagrams"
 )
 
 var (
@@ -48,7 +48,7 @@ func main() {
 
 	controllers.RegisterControllers(r)
 
-	// r.StaticFS("/static/", http.Dir("/Users/thomaspeugeot/go/src/github.com/thomaspeugeot/metabaron/examples/bookstore/ng/dist/ng"))
+	// r.StaticFS("/static/", http.Dir("/Users/thomaspeugeot/go/src/github.com/thomaspeugeot/sandbox02/bookstore/ng/dist/ng"))
 
 	var pkgelt models.Pkgelt
 	// parse the diagram package

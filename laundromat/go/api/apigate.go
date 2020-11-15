@@ -2,7 +2,7 @@
 package api
 
 import (
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 // APIGateStruct is the implementation of the APIGateImplCallback interface

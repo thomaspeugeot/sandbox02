@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type PositionSingloton struct {
 	Callback PositionCallbackInterface
 }
 
-// PositionCallbackInterface is the interface that must be supported 
+// PositionCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type PositionCallbackInterface interface {
 	PostPosition(position *models.Position)
@@ -50,7 +50,7 @@ type PositionInput struct {
 // GetPositions
 //
 // swagger:route GET /positions positions getPositions
-// 
+//
 // Get all positions
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetPositions(c *gin.Context) {
 // PostPosition
 //
 // swagger:route POST /positions positions postPosition
-// 
+//
 // Creates a position
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetPosition(c *gin.Context) {
 }
 
 // UpdatePosition
-// 
+//
 // swagger:route PATCH /positions/{ID} positions updatePosition
 //
 // Update a position
@@ -178,7 +178,7 @@ func UpdatePosition(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&positionDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdatePosition(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the positionDB
 	c.JSON(http.StatusOK, positionDB)
@@ -219,7 +219,6 @@ func DeletePosition(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetPositionClassshapesViaPosition swagger:route GET /positions/{ID}/classshapesviaposition positions getPositionClassshapesViaPosition
 //
 // Gets classshapes of position via field Position of Classshape.
@@ -243,7 +242,7 @@ func GetPositionClassshapesViaPosition(c *gin.Context) {
 	// get classshapes
 	var classshapeDBs orm.ClassshapeDBs
 	columnName := gorm.ToColumnName("PositionID")
-	query := db.Where( genQuery(columnName), position.ID).Find(&classshapeDBs)
+	query := db.Where(genQuery(columnName), position.ID).Find(&classshapeDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetPositionClassshapesViaPosition(c *gin.Context) {
 
 	c.JSON(http.StatusOK, classshapeDBs)
 }
-

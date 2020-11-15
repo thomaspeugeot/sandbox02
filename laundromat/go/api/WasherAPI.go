@@ -4,7 +4,7 @@ package api
 import (
 	"errors"
 
-	"github.com/thomaspeugeot/metabaron/examples/laundromat/go/models"
+	"github.com/thomaspeugeot/sandbox02/laundromat/go/models"
 )
 
 // WasherAPI is the twin in the "api" namespace of Washer of the "models" namespace

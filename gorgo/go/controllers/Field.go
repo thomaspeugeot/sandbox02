@@ -4,8 +4,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/models"
-	"github.com/thomaspeugeot/metabaron/libs/gorgo/go/orm"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/models"
+	"github.com/thomaspeugeot/sandbox02/gorgo/go/orm"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,7 +17,7 @@ type FieldSingloton struct {
 	Callback FieldCallbackInterface
 }
 
-// FieldCallbackInterface is the interface that must be supported 
+// FieldCallbackInterface is the interface that must be supported
 // by the Struct that is attached to the singloton
 type FieldCallbackInterface interface {
 	PostField(field *models.Field)
@@ -50,7 +50,7 @@ type FieldInput struct {
 // GetFields
 //
 // swagger:route GET /fields fields getFields
-// 
+//
 // Get all fields
 //
 // Responses:
@@ -75,7 +75,7 @@ func GetFields(c *gin.Context) {
 // PostField
 //
 // swagger:route POST /fields fields postField
-// 
+//
 // Creates a field
 //     Consumes:
 //     - application/json
@@ -146,7 +146,7 @@ func GetField(c *gin.Context) {
 }
 
 // UpdateField
-// 
+//
 // swagger:route PATCH /fields/{ID} fields updateField
 //
 // Update a field
@@ -178,7 +178,7 @@ func UpdateField(c *gin.Context) {
 		return
 	}
 
-	// update 
+	// update
 	query = db.Model(&fieldDB).Updates(input)
 	if query.Error != nil {
 		var returnError GenericError
@@ -186,7 +186,7 @@ func UpdateField(c *gin.Context) {
 		returnError.Body.Message = query.Error.Error()
 		c.JSON(http.StatusBadRequest, returnError.Body)
 		return
-	}	
+	}
 
 	// return status OK with the marshalling of the the fieldDB
 	c.JSON(http.StatusOK, fieldDB)
@@ -219,7 +219,6 @@ func DeleteField(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }
 
-
 // GetFieldClassshapesViaFields swagger:route GET /fields/{ID}/classshapesviafields fields getFieldClassshapesViaFields
 //
 // Gets classshapes of field via field Fields of Classshape.
@@ -243,7 +242,7 @@ func GetFieldClassshapesViaFields(c *gin.Context) {
 	// get classshapes
 	var classshapeDBs orm.ClassshapeDBs
 	columnName := gorm.ToColumnName("FieldsID")
-	query := db.Where( genQuery(columnName), field.ID).Find(&classshapeDBs)
+	query := db.Where(genQuery(columnName), field.ID).Find(&classshapeDBs)
 
 	if query.Error != nil {
 		var returnError GenericError
@@ -255,4 +254,3 @@ func GetFieldClassshapesViaFields(c *gin.Context) {
 
 	c.JSON(http.StatusOK, classshapeDBs)
 }
-

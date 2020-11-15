@@ -1,0 +1,39 @@
+<div *ngIf="washer">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(washer.ID)">
+            <div class="mat-header-cell left">Washer's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">CleanedLaundryWeight</div>
+			<div class="mat-cell right">{{washer.CleanedLaundryWeight.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">LaundryWeight</div>
+			<div class="mat-cell right">{{washer.LaundryWeight.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{washer.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">State</div>
+			<div class="mat-cell right">{{washer.State}}</div>
+		</div>
+
+
+
+	</div>
+
+
+</div>
+

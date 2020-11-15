@@ -1,0 +1,24 @@
+<div *ngIf="action">
+	<h3>New Action</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="action.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="action.Type">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

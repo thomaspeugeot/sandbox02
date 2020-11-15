@@ -1,0 +1,45 @@
+<div *ngIf="engine">
+	<h3>Engine details</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>ControlMode</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="engine.ControlMode">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Fired</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="engine.Fired">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="engine.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Speed</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="engine.Speed">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="engine.State">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="save()">
+	Save
+	</button>
+</div>

@@ -1,0 +1,27 @@
+<div *ngIf="action">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(action.ID)">
+            <div class="mat-header-cell left">Action's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{action.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Type</div>
+			<div class="mat-cell right">{{action.Type}}</div>
+		</div>
+
+
+
+	</div>
+
+
+</div>
+

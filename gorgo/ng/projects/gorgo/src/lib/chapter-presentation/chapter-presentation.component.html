@@ -1,0 +1,37 @@
+<div *ngIf="chapter">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(chapter.ID)">
+            <div class="mat-header-cell left">Chapter's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{chapter.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Title</div>
+			<div class="mat-cell right">{{chapter.Title}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Chapters as Chapters</div>
+	<app-chapters-table [ID]="chapter.ID" 
+		[field]="ChaptersViaChaptersFieldName"
+		[struct]="ChaptersViaChaptersStructName">
+	</app-chapters-table>
+	<div class="sub-table-header">Documents as Chapters</div>
+	<app-documents-table [ID]="chapter.ID" 
+		[field]="DocumentsViaChaptersFieldName"
+		[struct]="DocumentsViaChaptersStructName">
+	</app-documents-table>
+</div>
+

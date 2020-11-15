@@ -1,0 +1,27 @@
+<div *ngIf="gorgoaction">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(gorgoaction.ID)">
+            <div class="mat-header-cell left">Gorgoaction's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{gorgoaction.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Type</div>
+			<div class="mat-cell right">{{gorgoaction.Type}}</div>
+		</div>
+
+
+
+	</div>
+
+
+</div>
+

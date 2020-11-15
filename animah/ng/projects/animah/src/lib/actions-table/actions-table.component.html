@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="actions">
+
+    <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let Action"> {{Action.ID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let Action">
+            {{Action.Name}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Edit">
+    <th mat-header-cell *matHeaderCellDef> Edit </th>
+    <td mat-cell *matCellDef="let action;  let j = index;">
+        <i class="material-icons" [ngStyle]="{'color':'rgba(0,0,0,.50)'}" (click)="setEditorRouterOutlet(action.ID)">edit</i>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let action;  let j = index;">
+            <i class="material-icons" [ngStyle]="{'color':'rgba(0,0,0,.50)'}" (click)="deleteAction(action.ID, action)">delete</i>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="
+    let row; 
+    columns: displayedColumns;
+    " 
+    (click)="setPresentationRouterOutlet( row.ID ) "
+    class="row-link">
+    </tr>
+</table>

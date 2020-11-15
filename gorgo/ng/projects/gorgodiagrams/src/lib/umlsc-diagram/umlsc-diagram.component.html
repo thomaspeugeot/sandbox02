@@ -1,0 +1,14 @@
+<div>
+    <mat-toolbar *ngIf="savebutton">
+        <span>Gorgo</span>
+        <span class="example-spacer"></span>
+        <button mat-button (click)='saveClassdiagram()'>
+            <mat-icon  >
+                save
+            </mat-icon>
+        </button>
+    </mat-toolbar>
+</div>
+<div *ngIf="umlscDB" [id]="umlscDB.Name"></div>
+
+

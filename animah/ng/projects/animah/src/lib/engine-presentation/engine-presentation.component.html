@@ -1,0 +1,50 @@
+<div *ngIf="engine">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(engine.ID)">
+            <div class="mat-header-cell left">Engine's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">ControlMode</div>
+			<div class="mat-cell right">{{engine.ControlMode}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Fired</div>
+			<div class="mat-cell right">{{engine.Fired}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{engine.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Speed</div>
+			<div class="mat-cell right">{{engine.Speed.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">State</div>
+			<div class="mat-cell right">{{engine.State}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Agents as Engine</div>
+	<app-agents-table [ID]="engine.ID" 
+		[field]="AgentsViaEngineFieldName"
+		[struct]="AgentsViaEngineStructName">
+	</app-agents-table>
+</div>
+

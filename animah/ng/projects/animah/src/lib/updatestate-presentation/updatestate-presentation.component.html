@@ -1,0 +1,21 @@
+<div *ngIf="updatestate">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(updatestate.ID)">
+            <div class="mat-header-cell left">UpdateState's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Period</div>
+			<div class="mat-cell right">{{updatestate.Period}}</div>
+		</div>
+
+
+
+	</div>
+
+
+</div>
+

@@ -1,0 +1,44 @@
+<div *ngIf="field">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(field.ID)">
+            <div class="mat-header-cell left">Field's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Fieldname</div>
+			<div class="mat-cell right">{{field.Fieldname}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Fieldtypename</div>
+			<div class="mat-cell right">{{field.Fieldtypename}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{field.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Structname</div>
+			<div class="mat-cell right">{{field.Structname}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Classshapes as Fields</div>
+	<app-classshapes-table [ID]="field.ID" 
+		[field]="ClassshapesViaFieldsFieldName"
+		[struct]="ClassshapesViaFieldsStructName">
+	</app-classshapes-table>
+</div>
+

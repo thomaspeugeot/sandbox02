@@ -1,0 +1,49 @@
+<div *ngIf="machine">
+	<h3>New Machine</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>DrumLoad</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="machine.DrumLoad">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="machine.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>RemainingTime</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="machine.RemainingTime">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>RemainingTimeMinutes</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="machine.RemainingTimeMinutes">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="machine.State">
+    </mat-form-field>
+  </form>
+
+
+	<form>
+		<mat-checkbox [formControl]="CleanedlaundryFormControl">Cleanedlaundry</mat-checkbox>
+	</form>
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

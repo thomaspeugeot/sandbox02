@@ -1,0 +1,47 @@
+<div *ngIf="classshape">
+	<h3>Classshape details</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Heigth</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="classshape.Heigth">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="classshape.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Structname</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="classshape.Structname">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Width</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="classshape.Width">
+    </mat-form-field>
+  </form>
+
+
+
+    <mat-form-field>
+        <mat-label>Position</mat-label>
+        <mat-select [(ngModel)]="Position">
+            <mat-option *ngFor="let position of positions" [value]="position">
+                {{position.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+	<button mat-raised-button 
+	(click)="save()">
+	Save
+	</button>
+</div>

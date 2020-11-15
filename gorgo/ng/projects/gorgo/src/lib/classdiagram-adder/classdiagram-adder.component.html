@@ -1,0 +1,17 @@
+<div *ngIf="classdiagram">
+	<h3>New Classdiagram</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="classdiagram.Name">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

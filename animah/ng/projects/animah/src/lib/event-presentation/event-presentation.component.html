@@ -1,0 +1,32 @@
+<div *ngIf="event">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(event.ID)">
+            <div class="mat-header-cell left">Event's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Duration</div>
+			<div class="mat-cell right">{{event.Duration}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{event.Name}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">UpdateStates as Event</div>
+	<app-updatestates-table [ID]="event.ID" 
+		[field]="UpdateStatesViaEventFieldName"
+		[struct]="UpdateStatesViaEventStructName">
+	</app-updatestates-table>
+</div>
+

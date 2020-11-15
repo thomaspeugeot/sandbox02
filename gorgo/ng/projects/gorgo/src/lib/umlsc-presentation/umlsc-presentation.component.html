@@ -1,0 +1,32 @@
+<div *ngIf="umlsc">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(umlsc.ID)">
+            <div class="mat-header-cell left">Umlsc's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Activestate</div>
+			<div class="mat-cell right">{{umlsc.Activestate}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{umlsc.Name}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Pkgelts as Umlscs</div>
+	<app-pkgelts-table [ID]="umlsc.ID" 
+		[field]="PkgeltsViaUmlscsFieldName"
+		[struct]="PkgeltsViaUmlscsStructName">
+	</app-pkgelts-table>
+</div>
+

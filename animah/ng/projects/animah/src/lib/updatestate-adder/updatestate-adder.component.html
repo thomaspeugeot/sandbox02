@@ -1,0 +1,17 @@
+<div *ngIf="updatestate">
+	<h3>New UpdateState</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Period</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="updatestate.Period">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

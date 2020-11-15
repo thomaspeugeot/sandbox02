@@ -1,0 +1,126 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+
+    {
+      // you can check in go.mod, the timestamp is UTC
+      "label": "00 - go get -u ./...",
+      "type": "shell",
+      "group": "build",
+      "command": "go get -u ./..."
+    },
+    {
+      // you can check in go.mod, the timestamp is UTC
+      "label": "01 - go test",
+      "type": "shell",
+      "group": "build",
+      "command": "cd go/tests; go test"
+    },
+    {
+      "label": "03 - l&g gorgo",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/../metabaron/go/metabaron"
+      },
+      "command": "go",
+      "group": "build",
+      "args": [
+        "run",
+        "main.go",
+        "-pkgPath",
+        "../../../gorgo/go/models",
+        "-loadAndGenerate",
+        // "-addr",
+        // "localhost:8083"
+      ]
+    },
+    {
+      "label": "04 - ng build gorgo",
+      "type": "shell",
+      "command": "cd ng; ng build gorgo",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "04 - ng build gorgo --watch",
+      "type": "shell",
+      "command": "cd ng; ng build gorgo --watch",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "04 - ng build gorgodiagrams",
+      "type": "shell",
+      "command": "cd ng; ng build gorgodiagrams",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "04 - ng build gorgodiagrams --watch",
+      "type": "shell",
+      "command": "cd ng; ng build gorgodiagrams --watch",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "05 - ng serve on 4203",
+      "type": "shell",
+      "command": "cd ng; ng serve --port 4203",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "05 - ng serve on 4200",
+      "type": "shell",
+      "command": "cd ng; ng serve --port 4200",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "06 - run gorgo backend on tests/geometry/diagrams",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/go/gorgo"
+      },
+      "command": "go run main.go -pkgPath ../tests/geometry/diagrams",
+      "group": "build",
+    },
+    {
+      "label": "06 - run gorgo backend on ../diagrams",
+      "type": "shell",
+      "command": "cd go/gorgo; go run main.go -pkgPath ../diagrams",
+      "group": "build",
+    },
+    {
+      "label": "06b -run gorgo backend on sdsdamb/go/diagrams",
+      "type": "shell",
+      "command": "cd go/gorgo; go run main.go -pkgPath ../../../sdsdamb/go/diagrams",
+      "group": "build",
+    },
+    {      
+      "label": "06 - run gorgo backend on metabaron/examples/laundromat/go/diagrams",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/go/gorgo"
+      },
+      "command": "go run main.go -pkgPath ../../../metabaron/examples/laundromat/go/diagrams",
+      "group": "build",
+    },
+    {
+
+      "label": "Sequence",
+      "dependsOrder": "sequence",
+      
+      "dependsOn": [
+        "00 - update dependencies -> go get -u ./...",
+        "01 - go test",
+        "03 - l&g gorgo",
+        "04 - ng build gorgo",
+        "04 - ng build gorgodiagrams",
+      ],
+      "group": "build"
+  },
+  ]
+}

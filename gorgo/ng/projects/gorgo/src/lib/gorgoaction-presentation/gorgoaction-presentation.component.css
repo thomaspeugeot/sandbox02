@@ -1,0 +1,59 @@
+
+.mat-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.mat-full-width {
+  width: 100%;
+}
+
+.mat-table {
+	display: block;
+  }
+  
+  .mat-row,
+  .mat-header-row {
+	display: flex;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: rgba(0,0,0,.12);
+	align-items: center;
+	min-height: 48px;
+	padding: 0 24px;
+  }
+  
+  .mat-cell,
+  .mat-header-cell {
+	flex: 1;
+	overflow: hidden;
+	word-wrap: break-word;
+  }
+
+  .left {
+    flex-grow: 30;
+}
+
+.right {
+    flex-grow: 70;
+}
+
+.less-right {
+    flex-grow: 65;
+}
+
+.far-right {
+    flex-grow: 5;
+}
+
+.pointer-to-struct-row:hover {
+    background-color: rgba(0, 0, 0, .05);
+    cursor: pointer;
+}
+
+.sub-table-header {
+    width: 100%;
+    font-size: 9pt;
+    text-align: center;
+}

@@ -1,0 +1,31 @@
+<div *ngIf="state">
+	<h3>New State</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="state.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>X</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="state.X">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Y</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="state.Y">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

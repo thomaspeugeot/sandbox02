@@ -1,0 +1,98 @@
+<div *ngIf="document">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(document.ID)">
+            <div class="mat-header-cell left">Document's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Author1</div>
+			<div class="mat-cell right">{{document.Author1}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Author1function</div>
+			<div class="mat-cell right">{{document.Author1function}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Author2</div>
+			<div class="mat-cell right">{{document.Author2}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Author2function</div>
+			<div class="mat-cell right">{{document.Author2function}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Authority</div>
+			<div class="mat-cell right">{{document.Authority}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Authorityfunction</div>
+			<div class="mat-cell right">{{document.Authorityfunction}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Date</div>
+			<div class="mat-cell right">{{document.Date}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{document.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Outputfilepath</div>
+			<div class="mat-cell right">{{document.Outputfilepath}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Templatefilepath</div>
+			<div class="mat-cell right">{{document.Templatefilepath}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Title</div>
+			<div class="mat-cell right">{{document.Title}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Verifier</div>
+			<div class="mat-cell right">{{document.Verifier}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Verifierfunction</div>
+			<div class="mat-cell right">{{document.Verifierfunction}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Pkgelts as Documents</div>
+	<app-pkgelts-table [ID]="document.ID" 
+		[field]="PkgeltsViaDocumentsFieldName"
+		[struct]="PkgeltsViaDocumentsStructName">
+	</app-pkgelts-table>
+</div>
+

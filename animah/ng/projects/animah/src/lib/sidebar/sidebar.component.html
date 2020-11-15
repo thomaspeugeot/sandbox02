@@ -1,0 +1,23 @@
+<mat-list>
+	<mat-list-item 
+		class="row-link">
+		<span (click)="setTableRouterOutlet( 'actions' )" >Actions &nbsp;</span>
+		<mat-icon (click)="setEditorRouterOutlet( 'action-adder' )">
+			add_circle_outline
+		</mat-icon>
+		</mat-list-item>
+	<mat-list-item 
+		class="row-link">
+		<span (click)="setTableRouterOutlet( 'agents' )" >Agents &nbsp;</span>
+		<mat-icon (click)="setEditorRouterOutlet( 'agent-adder' )">
+			add_circle_outline
+		</mat-icon>
+		</mat-list-item>
+	<mat-list-item 
+		class="row-link">
+		<span (click)="setTableRouterOutlet( 'engines' )" >Engines &nbsp;</span>
+		<mat-icon (click)="setEditorRouterOutlet( 'engine-adder' )">
+			add_circle_outline
+		</mat-icon>
+		</mat-list-item>
+</mat-list>

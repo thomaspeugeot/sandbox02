@@ -1,0 +1,24 @@
+<div *ngIf="chapter">
+	<h3>Chapter details</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="chapter.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="chapter.Title">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="save()">
+	Save
+	</button>
+</div>

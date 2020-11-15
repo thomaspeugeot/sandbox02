@@ -1,0 +1,24 @@
+<div *ngIf="umlsc">
+	<h3>New Umlsc</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Activestate</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="umlsc.Activestate">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="umlsc.Name">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

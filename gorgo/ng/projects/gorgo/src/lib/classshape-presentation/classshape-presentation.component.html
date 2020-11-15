@@ -1,0 +1,44 @@
+<div *ngIf="classshape">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(classshape.ID)">
+            <div class="mat-header-cell left">Classshape's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Heigth</div>
+			<div class="mat-cell right">{{classshape.Heigth.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{classshape.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Structname</div>
+			<div class="mat-cell right">{{classshape.Structname}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Width</div>
+			<div class="mat-cell right">{{classshape.Width.toPrecision(5)}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Classdiagrams as Classshapes</div>
+	<app-classdiagrams-table [ID]="classshape.ID" 
+		[field]="ClassdiagramsViaClassshapesFieldName"
+		[struct]="ClassdiagramsViaClassshapesStructName">
+	</app-classdiagrams-table>
+</div>
+

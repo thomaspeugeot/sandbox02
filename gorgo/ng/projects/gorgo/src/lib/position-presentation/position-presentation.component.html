@@ -1,0 +1,38 @@
+<div *ngIf="position">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(position.ID)">
+            <div class="mat-header-cell left">Position's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{position.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">X</div>
+			<div class="mat-cell right">{{position.X.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Y</div>
+			<div class="mat-cell right">{{position.Y.toPrecision(5)}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Classshapes as Position</div>
+	<app-classshapes-table [ID]="position.ID" 
+		[field]="ClassshapesViaPositionFieldName"
+		[struct]="ClassshapesViaPositionStructName">
+	</app-classshapes-table>
+</div>
+

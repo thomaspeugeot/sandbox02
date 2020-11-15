@@ -1,0 +1,682 @@
+consumes:
+- application/json
+definitions:
+  AgentInterface:
+    description: AgentInterface is the interface that must be followed by part of
+      the simulation
+    type: object
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/models
+  EngineSpecificInterface:
+    description: |-
+      EngineSpecificInterface is the callback support for
+      events that happens on the generic engine
+    type: object
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/models
+  EventInterface:
+    title: EventInterface ...
+  actionAPI:
+    description: |-
+      for POST, API, one needs the fields of the model as well as the fields
+      from associations ("Has One" and "Has Many") that are generated to
+      fullfill the ORM requirements for associations
+    properties:
+      Name:
+        type: string
+    title: ActionAPI is the input in POST API
+    type: object
+    x-go-name: ActionAPI
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+  actionDB:
+    description: 'It incorporates all fields : from the model, from the generated
+      field for the API and the GORM ID'
+    properties:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    title: ActionDB describes a action in the database
+    type: object
+    x-go-name: ActionDB
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+  agentAPI:
+    description: |-
+      for POST, API, one needs the fields of the model as well as the fields
+      from associations ("Has One" and "Has Many") that are generated to
+      fullfill the ORM requirements for associations
+    properties:
+      EngineID:
+        description: |-
+          field Engine is a pointer to another Struct (optional or 0..1)
+          This field is generated into another field to enable a GORM `HAS ONE` association
+        format: uint64
+        type: integer
+      EngineName:
+        description: the associated Struct has a Name field, therefore it is generated
+          to compute views with this relation
+        type: string
+      TechName:
+        type: string
+    title: AgentAPI is the input in POST API
+    type: object
+    x-go-name: AgentAPI
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+  agentDB:
+    description: 'It incorporates all fields : from the model, from the generated
+      field for the API and the GORM ID'
+    properties:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      EngineID:
+        description: |-
+          field Engine is a pointer to another Struct (optional or 0..1)
+          This field is generated into another field to enable a GORM `HAS ONE` association
+        format: uint64
+        type: integer
+      EngineName:
+        description: the associated Struct has a Name field, therefore it is generated
+          to compute views with this relation
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      TechName:
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    title: AgentDB describes a agent in the database
+    type: object
+    x-go-name: AgentDB
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+  engineAPI:
+    description: |-
+      for POST, API, one needs the fields of the model as well as the fields
+      from associations ("Has One" and "Has Many") that are generated to
+      fullfill the ORM requirements for associations
+    properties:
+      ControlMode:
+        description: control mode.
+        enum:
+        - Autonomous
+        - ClientControl
+        type: string
+      CurrentTime:
+        description: CurrentTime is the simulation current time
+        format: date-time
+        type: string
+      EndTime:
+        description: EndTime is the simulatio end date
+        format: date-time
+        type: string
+      EngineSpecificInteface:
+        $ref: '#/definitions/EngineSpecificInterface'
+      Fired:
+        description: Fired events
+        format: int64
+        type: integer
+      LastEvent:
+        $ref: '#/definitions/EventInterface'
+      LastEventAgent:
+        $ref: '#/definitions/AgentInterface'
+      Name:
+        description: Name of the engine "laundramat" for instance
+        type: string
+      Speed:
+        description: Speed compared to realtime
+        format: double
+        type: number
+      StartTime:
+        description: StartTime is the simulation start date
+        format: date-time
+        type: string
+      State:
+        description: engine state
+        enum:
+        - RUNNING
+        - PAUSED
+        - OVER
+        type: string
+    title: EngineAPI is the input in POST API
+    type: object
+    x-go-name: EngineAPI
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+  engineDB:
+    description: 'It incorporates all fields : from the model, from the generated
+      field for the API and the GORM ID'
+    properties:
+      ControlMode:
+        description: control mode.
+        enum:
+        - Autonomous
+        - ClientControl
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      CurrentTime:
+        description: CurrentTime is the simulation current time
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      EndTime:
+        description: EndTime is the simulatio end date
+        format: date-time
+        type: string
+      EngineSpecificInteface:
+        $ref: '#/definitions/EngineSpecificInterface'
+      Fired:
+        description: Fired events
+        format: int64
+        type: integer
+      ID:
+        format: uint64
+        type: integer
+      LastEvent:
+        $ref: '#/definitions/EventInterface'
+      LastEventAgent:
+        $ref: '#/definitions/AgentInterface'
+      Name:
+        description: Name of the engine "laundramat" for instance
+        type: string
+      Speed:
+        description: Speed compared to realtime
+        format: double
+        type: number
+      StartTime:
+        description: StartTime is the simulation start date
+        format: date-time
+        type: string
+      State:
+        description: engine state
+        enum:
+        - RUNNING
+        - PAUSED
+        - OVER
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+    title: EngineDB describes a engine in the database
+    type: object
+    x-go-name: EngineDB
+    x-go-package: github.com/thomaspeugeot/metabaron/libs/animah/go/orm
+host: localhost:8080
+info:
+  description: animah exposes types of a package.
+  title: |-
+    generated by genGoDocs.go
+    Package animah animah backend API
+  version: "0.1"
+paths:
+  /actions:
+    get:
+      description: Get all actions
+      operationId: getActions
+      responses:
+        "200":
+          $ref: '#/responses/actionDBsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - actions
+    post:
+      consumes:
+      - application/json
+      description: Creates a action
+      operationId: postAction
+      parameters:
+      - description: The Action to submit or modify
+        in: body
+        name: Action
+        schema:
+          $ref: '#/definitions/actionAPI'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/actionDBResponse'
+      tags:
+      - actions
+  /actions/{ID}:
+    delete:
+      description: Delete a action
+      operationId: deleteAction
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - actions
+    get:
+      operationId: getAction
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/actionDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a action.
+      tags:
+      - actions
+    patch:
+      description: Update a action
+      operationId: updateAction
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Action to submit or modify
+        in: body
+        name: Action
+        schema:
+          $ref: '#/definitions/actionAPI'
+      responses:
+        "200":
+          $ref: '#/responses/actionDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - actions
+  /agents:
+    get:
+      description: Get all agents
+      operationId: getAgents
+      responses:
+        "200":
+          $ref: '#/responses/agentDBsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - agents
+    post:
+      consumes:
+      - application/json
+      description: Creates a agent
+      operationId: postAgent
+      parameters:
+      - description: The Agent to submit or modify
+        in: body
+        name: Agent
+        schema:
+          $ref: '#/definitions/agentAPI'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/agentDBResponse'
+      tags:
+      - agents
+  /agents/{ID}:
+    delete:
+      description: Delete a agent
+      operationId: deleteAgent
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - agents
+    get:
+      operationId: getAgent
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/agentDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a agent.
+      tags:
+      - agents
+    patch:
+      description: Update a agent
+      operationId: updateAgent
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Agent to submit or modify
+        in: body
+        name: Agent
+        schema:
+          $ref: '#/definitions/agentAPI'
+      responses:
+        "200":
+          $ref: '#/responses/agentDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - agents
+  /agents/{ID}/engine:
+    get:
+      operationId: getAgentEngine
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/engineDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets engine of a agent.
+      tags:
+      - agents
+  /engines:
+    get:
+      description: Get all engines
+      operationId: getEngines
+      responses:
+        "200":
+          $ref: '#/responses/engineDBsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - engines
+    post:
+      consumes:
+      - application/json
+      description: Creates a engine
+      operationId: postEngine
+      parameters:
+      - description: The Engine to submit or modify
+        in: body
+        name: Engine
+        schema:
+          $ref: '#/definitions/engineAPI'
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/engineDBResponse'
+      tags:
+      - engines
+  /engines/{ID}:
+    delete:
+      description: Delete a engine
+      operationId: deleteEngine
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - engines
+    get:
+      operationId: getEngine
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/engineDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets the details for a engine.
+      tags:
+      - engines
+    patch:
+      description: Update a engine
+      operationId: updateEngine
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: The Engine to submit or modify
+        in: body
+        name: Engine
+        schema:
+          $ref: '#/definitions/engineAPI'
+      responses:
+        "200":
+          $ref: '#/responses/engineDBResponse'
+        default:
+          $ref: '#/responses/genericError'
+      tags:
+      - engines
+  /engines/{ID}/agentsviaengine:
+    get:
+      operationId: getEngineAgentsViaEngine
+      parameters:
+      - description: The ID of the order
+        format: int64
+        in: path
+        name: ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          $ref: '#/responses/agentDBsResponse'
+        default:
+          $ref: '#/responses/genericError'
+      summary: Gets agents of engine via field Engine of Agent.
+      tags:
+      - engines
+produces:
+- application/json
+responses:
+  actionDBResponse:
+    description: ActionDBResponse provides response
+    headers:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      Name:
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+  actionDBsResponse:
+    description: ActionDBs arrays actionDBs
+    schema:
+      items:
+        $ref: '#/definitions/actionDB'
+      type: array
+  agentDBResponse:
+    description: AgentDBResponse provides response
+    headers:
+      CreatedAt:
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      EngineID:
+        description: |-
+          field Engine is a pointer to another Struct (optional or 0..1)
+          This field is generated into another field to enable a GORM `HAS ONE` association
+        format: uint64
+        type: integer
+      EngineName:
+        description: the associated Struct has a Name field, therefore it is generated
+          to compute views with this relation
+        type: string
+      ID:
+        format: uint64
+        type: integer
+      TechName:
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+  agentDBsResponse:
+    description: AgentDBs arrays agentDBs
+    schema:
+      items:
+        $ref: '#/definitions/agentDB'
+      type: array
+  engineDBResponse:
+    description: EngineDBResponse provides response
+    headers:
+      ControlMode:
+        description: control mode.
+        enum:
+        - - Autonomous
+          - ClientControl
+        type: string
+      CreatedAt:
+        format: date-time
+        type: string
+      CurrentTime:
+        description: CurrentTime is the simulation current time
+        format: date-time
+        type: string
+      DeletedAt:
+        format: date-time
+        type: string
+      EndTime:
+        description: EndTime is the simulatio end date
+        format: date-time
+        type: string
+      EngineSpecificInteface:
+        description: |-
+          EngineSpecificInteface supportspecific callback
+          on the engine events
+      Fired:
+        description: Fired events
+        format: int64
+        type: integer
+      ID:
+        format: uint64
+        type: integer
+      LastEvent:
+        description: LastEvent ...
+      LastEventAgent:
+        description: LastEvent agent
+      Name:
+        description: Name of the engine "laundramat" for instance
+        type: string
+      Speed:
+        description: Speed compared to realtime
+        format: double
+        type: number
+      StartTime:
+        description: StartTime is the simulation start date
+        format: date-time
+        type: string
+      State:
+        description: engine state
+        enum:
+        - - RUNNING
+          - PAUSED
+          - OVER
+        type: string
+      UpdatedAt:
+        format: date-time
+        type: string
+      agents:
+        description: list of engine agents
+        items:
+          $ref: '#/definitions/AgentInterface'
+        type: array
+    schema:
+      $ref: '#/definitions/EngineSpecificInterface'
+  engineDBsResponse:
+    description: EngineDBs arrays engineDBs
+    schema:
+      items:
+        $ref: '#/definitions/engineDB'
+      type: array
+  genericError:
+    description: |-
+      A GenericError is the default error message that is generated.
+      For certain status codes there are more appropriate error structures.
+    schema:
+      properties:
+        code:
+          format: int32
+          type: integer
+          x-go-name: Code
+        message:
+          type: string
+          x-go-name: Message
+      type: object
+  validationError:
+    description: |-
+      A ValidationError is an that is generated for validation failures.
+      It has the same fields as a generic error but adds a Field property.
+    schema:
+      properties:
+        code:
+          format: int32
+          type: integer
+          x-go-name: Code
+        field:
+          type: string
+          x-go-name: Field
+        message:
+          type: string
+          x-go-name: Message
+      type: object
+schemes:
+- http
+securityDefinitions:
+  basic:
+    type: basic
+swagger: "2.0"

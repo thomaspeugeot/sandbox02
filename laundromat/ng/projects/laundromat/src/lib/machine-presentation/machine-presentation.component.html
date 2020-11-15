@@ -1,0 +1,56 @@
+<div *ngIf="machine">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(machine.ID)">
+            <div class="mat-header-cell left">Machine's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">DrumLoad</div>
+			<div class="mat-cell right">{{machine.DrumLoad.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{machine.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">RemainingTime</div>
+			<div class="mat-cell right">{{machine.RemainingTime}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">RemainingTimeMinutes</div>
+			<div class="mat-cell right">{{machine.RemainingTimeMinutes}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">State</div>
+			<div class="mat-cell right">{{machine.State}}</div>
+		</div>
+
+
+<div class="mat-row">
+<div class="mat-cell left">Cleanedlaundry</div>
+<div class="mat-cell left">
+	<mat-checkbox [checked]="machine.Cleanedlaundry" disabled=true></mat-checkbox>
+</div>
+</div>
+
+	</div>
+
+
+	<div class="sub-table-header">Washers as Machine</div>
+	<app-washers-table [ID]="machine.ID" 
+		[field]="WashersViaMachineFieldName"
+		[struct]="WashersViaMachineStructName">
+	</app-washers-table>
+</div>
+

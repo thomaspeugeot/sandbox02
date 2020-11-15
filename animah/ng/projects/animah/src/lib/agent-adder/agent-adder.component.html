@@ -1,0 +1,26 @@
+<div *ngIf="agent">
+	<h3>New Agent</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>TechName</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="agent.TechName">
+    </mat-form-field>
+  </form>
+
+
+
+    <mat-form-field>
+        <mat-label>Engine</mat-label>
+        <mat-select [(ngModel)]="Engine">
+            <mat-option *ngFor="let engine of engines" [value]="engine">
+                {{engine.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+	<button mat-raised-button 
+	(click)="add()">
+	Add
+	</button>
+</div>

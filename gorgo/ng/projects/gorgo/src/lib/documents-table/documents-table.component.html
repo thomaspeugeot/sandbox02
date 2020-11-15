@@ -1,0 +1,122 @@
+<table mat-table [dataSource]="documents">
+
+    <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let Document"> {{Document.ID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Author1">
+        <th mat-header-cell *matHeaderCellDef> Author1 </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Author1}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Author1function">
+        <th mat-header-cell *matHeaderCellDef> Author1function </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Author1function}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Author2">
+        <th mat-header-cell *matHeaderCellDef> Author2 </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Author2}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Author2function">
+        <th mat-header-cell *matHeaderCellDef> Author2function </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Author2function}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Authority">
+        <th mat-header-cell *matHeaderCellDef> Authority </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Authority}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Authorityfunction">
+        <th mat-header-cell *matHeaderCellDef> Authorityfunction </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Authorityfunction}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Date}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Document </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Name}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Outputfilepath">
+        <th mat-header-cell *matHeaderCellDef> Outputfilepath </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Outputfilepath}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Templatefilepath">
+        <th mat-header-cell *matHeaderCellDef> Templatefilepath </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Templatefilepath}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Title}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Verifier">
+        <th mat-header-cell *matHeaderCellDef> Verifier </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Verifier}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Verifierfunction">
+        <th mat-header-cell *matHeaderCellDef> Verifierfunction </th>
+        <td mat-cell *matCellDef="let Document">
+            {{Document.Verifierfunction}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Edit">
+    <th mat-header-cell *matHeaderCellDef> Edit </th>
+    <td mat-cell *matCellDef="let document;  let j = index;">
+        <i class="material-icons" [ngStyle]="{'color':'rgba(0,0,0,.50)'}" (click)="setEditorRouterOutlet(document.ID)">edit</i>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let document;  let j = index;">
+            <i class="material-icons" [ngStyle]="{'color':'rgba(0,0,0,.50)'}" (click)="deleteDocument(document.ID, document)">delete</i>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="
+    let row; 
+    columns: displayedColumns;
+    " 
+    (click)="setPresentationRouterOutlet( row.ID ) "
+    class="row-link">
+    </tr>
+</table>

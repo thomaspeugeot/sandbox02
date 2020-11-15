@@ -1,0 +1,31 @@
+<div *ngIf="position">
+	<h3>Position details</h3>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input name="" [ngModelOptions]="{standalone: true}" 	 matInput [(ngModel)]="position.Name">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>X</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="position.X">
+    </mat-form-field>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <mat-label>Y</mat-label>
+      <input type="number" [ngModelOptions]="{standalone: true}"  matInput [(ngModel)]="position.Y">
+    </mat-form-field>
+  </form>
+
+
+
+	<button mat-raised-button 
+	(click)="save()">
+	Save
+	</button>
+</div>

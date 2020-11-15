@@ -1,0 +1,16 @@
+<mat-list>
+	<mat-list-item 
+		class="row-link">
+		<span (click)="setTableRouterOutlet( 'machines' )" >Machines &nbsp;</span>
+		<mat-icon (click)="setEditorRouterOutlet( 'machine-adder' )">
+			add_circle_outline
+		</mat-icon>
+		</mat-list-item>
+	<mat-list-item 
+		class="row-link">
+		<span (click)="setTableRouterOutlet( 'washers' )" >Washers &nbsp;</span>
+		<mat-icon (click)="setEditorRouterOutlet( 'washer-adder' )">
+			add_circle_outline
+		</mat-icon>
+		</mat-list-item>
+</mat-list>

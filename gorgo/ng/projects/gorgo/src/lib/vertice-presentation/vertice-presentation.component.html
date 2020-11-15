@@ -1,0 +1,38 @@
+<div *ngIf="vertice">
+    <div class="mat-table">
+        <div class="mat-header-row  pointer-to-struct-row" (click)="setEditorRouterOutlet(vertice.ID)">
+            <div class="mat-header-cell left">Vertice's fields</div>
+			<div class="mat-header-cell less-right">Values</div>
+			<div class="mat-header-cell far-right"><i class="material-icons">edit</i></div>
+        </div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Name</div>
+			<div class="mat-cell right">{{vertice.Name}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">X</div>
+			<div class="mat-cell right">{{vertice.X.toPrecision(5)}}</div>
+		</div>
+
+
+		<div class="mat-row">
+			<div class="mat-cell left">Y</div>
+			<div class="mat-cell right">{{vertice.Y.toPrecision(5)}}</div>
+		</div>
+
+
+
+	</div>
+
+
+	<div class="sub-table-header">Links as Middlevertice</div>
+	<app-links-table [ID]="vertice.ID" 
+		[field]="LinksViaMiddleverticeFieldName"
+		[struct]="LinksViaMiddleverticeStructName">
+	</app-links-table>
+</div>
+

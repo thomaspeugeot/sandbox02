@@ -65,4 +65,22 @@ cd laundromat/ng
 ng serve
 ```
 
+Unexpected behavior
+
+Note : to have the go backend run
+```
+cd gorgo/go/models
+go install
+cd ../../..
+```
+```
+cd laundromat/go/models
+go install
+cd ../../..
+```
+
+```
+go run main.go -client-control
+```
+
 

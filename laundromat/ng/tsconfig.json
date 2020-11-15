@@ -21,23 +21,16 @@
         "dist/laundromat"
       ],
       "animahcontrol": [
-        "../../../libs/animah/ng/projects/animahcontrol/src/public-api.ts"
+        "../../animah/ng/projects/animahcontrol/src/public-api.ts"
       ],
       "animah": [
-        "../../../libs/animah/ng/projects/animah/src/public-api.ts"
+        "../../animah/ng/projects/animah/src/public-api.ts"
       ],
-      // #126 
-      // "animahcontrol": [
-      //   "../../../libs/animah/ng/dist/animahcontrol"
-      // ],
-      // "animah": [
-      //   "../../../libs/animah/ng/dist/animah"
-      // ],
       "gorgo": [
-        "../../../libs/gorgo/ng/projects/gorgo/src/public-api.ts"
+        "../../gorgo/ng/projects/gorgo/src/public-api.ts"
       ],
       "gorgodiagrams": [
-        "../../../libs/gorgo/ng/projects/gorgodiagrams/src/public-api.ts"
+        "../../gorgo/ng/projects/gorgodiagrams/src/public-api.ts"
       ],
 
     }
